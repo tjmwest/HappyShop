@@ -7,6 +7,7 @@ import ci553.happyshop.orderManagement.OrderHub;
 import ci553.happyshop.utility.StorageLocation;
 import ci553.happyshop.utility.ProductListFormatter;
 
+import java.util.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -141,6 +142,7 @@ public class CustomerModel {
         }
         Product newPro = new Product(theProduct.getProductId(), theProduct.getProductDescription(), theProduct.getProductImageName(), theProduct.getUnitPrice(), theProduct.getStockQuantity());
         trolley.add(newPro);
+        Collections.sort(trolley);
     }
     /**
      * Groups products by their productId to optimize database queries and updates.
