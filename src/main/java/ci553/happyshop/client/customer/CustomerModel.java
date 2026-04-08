@@ -70,7 +70,8 @@ public class CustomerModel {
             //TODO
             // 1. Merges items with the same product ID (combining their quantities).
             // 2. Sorts the products in the trolley by product ID.
-            trolley.add(theProduct);
+            //trolley.add(theProduct);
+            organizeTrolley();
             displayTaTrolley = ProductListFormatter.buildString(trolley); //build a String for trolley so that we can show it
         }
         else{
@@ -131,7 +132,16 @@ public class CustomerModel {
         }
         updateView();
     }
-
+    void organizeTrolley (){
+        for (Product p: trolley) {
+            if (p.getProductId().equals(theProduct.getProductId())) {
+                p.setOrderedQuantity(p.getOrderedQuantity()+ theProduct.getOrderedQuantity());
+                return;
+            }
+        }
+        Product newPro = new Product(theProduct.getProductId(), theProduct.getProductDescription(), theProduct.getProductImageName(), theProduct.getUnitPrice(), theProduct.getStockQuantity());
+        trolley.add(newPro);
+    }
     /**
      * Groups products by their productId to optimize database queries and updates.
      * By grouping products, we can check the stock for a given `productId` once, rather than repeatedly
